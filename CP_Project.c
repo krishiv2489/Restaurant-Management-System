@@ -7,6 +7,7 @@ int chef();
 int table_manager();
 int login();
 void menu();
+int order();
 
 //global array so that all functions can acces them.
 char items[5][20] = {"Pizza","Burger","Pasta","Coffee","Salad"};
@@ -50,17 +51,17 @@ int login(){
         "|  3. Login as WAITER         |\n"
         "|  4. Login as TABLE MANAGER  |\n"
         "========================================\n");
-    retry:
+    retry1:
         printf("Select an option (1-4): ");
         scanf("%d",&who);
     
     //if the user input 5 or 0.
     if(who!=1 && who!=2 && who!=3 && who!=4){
         printf("Invalid Input!! Error!!\n");
-        goto retry;
+        goto retry1;
     }
-    
-     printf(
+    retry2:
+    printf(
         "\n------------ LOGIN PORTAL ------------\n");
 
     printf("USERNAME / ID:-- ");
@@ -71,23 +72,24 @@ int login(){
 
     printf("--------------------------------------\n");
 
-
+    
     if(strcmp(usr, "owner") == 0 && strcmp(pass, "owner_123") == 0){
-        printf("Succesfully LOGGED IN!!\n");
+        printf("Succesfully LOGGED IN as %s!!\n", usr);
     }
     else if(strcmp(usr, "chef") == 0 && strcmp(pass, "chef_123") == 0){
-        printf("Succesfully LOGGED IN!!\n");
+        printf("Succesfully LOGGED IN as %s!!\n", usr);
     }
     else if(strcmp(usr, "waiter") == 0 && strcmp(pass, "waiter_123") == 0){
-        printf("Succesfully LOGGED IN!!\n");
+        printf("Succesfully LOGGED IN as %s!!\n", usr);
     }
     else if(strcmp(usr, "table_man") == 0 && strcmp(pass, "table_man_123") == 0){
-        printf("Succesfully LOGGED IN!!\n");
+        printf("Succesfully LOGGED IN as %s!!\n", usr);
     }
     else{
         printf("LOGIN CREDENTIALS are INCORRECT!!\n");
+        goto retry2;
     }
-
+    printf("\n");
     return who; //returns who has the person logged as.
 }
 
@@ -111,4 +113,9 @@ void menu(){
     for(int i = 0; i<5; i++){
         printf("%d. %s -------- %d\n", i+1, items[i], price[i]);
     }
+    printf("====================\n");
+}
+
+int order(){
+
 }
