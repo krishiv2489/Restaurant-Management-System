@@ -1,10 +1,19 @@
 #include<stdio.h>
 #include<string.h>
+
 int owner();
 int waiter();
 int chef();
 int table_manager();
 int login();
+void menu();
+
+//global array so that all functions can acces them.
+char items[5][20] = {"Pizza","Burger","Pasta","Coffee","Salad"};
+int price[5] = {250,150,200,50,120};
+int qty[5] = {5,4,3,8,6};
+
+
 int main() {
     int who = login();
 
@@ -34,7 +43,7 @@ int login(){
 
     printf(
         "========================================\n"
-        "               WELCOME  \n"
+        "           WELCOME to FAST EAT  \n"
         "========================================\n"
         "|  1. Login as OWNER          |\n"
         "|  2. Login as CHEF           |\n"
@@ -83,14 +92,23 @@ int login(){
 }
 
 int owner(){
-    
+
 }
 int waiter(){
-
+    menu();
 }
 int chef(){
 
 }
 int table_manager(){
 
+}
+
+void menu(){
+    printf("--------------------\n"
+           "        MENU        \n"
+           "--------------------\n");
+    for(int i = 0; i<5; i++){
+        printf("%d. %s -------- %d\n", i+1, items[i], price[i]);
+    }
 }
