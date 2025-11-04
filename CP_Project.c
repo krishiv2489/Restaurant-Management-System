@@ -7,13 +7,13 @@ int chef();
 int table_manager();
 int login();
 void menu();
-int order();
+int cost_order();
 
 //global array so that all functions can acces them.
 char items[5][20] = {"Pizza","Burger","Pasta","Coffee","Salad"};
 int price[5] = {250,150,200,50,120};
 int qty[5] = {5,4,3,8,6};
-
+int order[5][2];
 
 int main() {
     int who = login();
@@ -98,6 +98,7 @@ int owner(){
 }
 int waiter(){
     menu();
+    cost_order();
 }
 int chef(){
 
@@ -113,9 +114,21 @@ void menu(){
     for(int i = 0; i<5; i++){
         printf("%d. %s -------- %d\n", i+1, items[i], price[i]);
     }
-    printf("====================\n");
+    printf("====================\n\n");
 }
 
-int order(){
+int cost_order(){
 
+    printf("ORDER Initialized!!");
+    printf("--------------------------------\n");
+    printf("Just enter the index of the item!!(To exit press 0)\n");
+    int j = 0;
+    do{
+        int quant=0;
+        scanf("%d",&order[0][j]);
+        printf("Quantity:-- ");
+        scanf("%d", &quant);
+        order[1][j] = quant;
+        j++;
+    }while(order[0][j-1]!=0);
 }
