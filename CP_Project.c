@@ -148,7 +148,7 @@ int bill(){
     while(order[0][i] != 0){
         int a = order[0][i];//item
         int b = order[1][i];//quantity
-        printf("%d.      %s     %d          %d\n", a, items[a-1], b, price[a-1]*b);
+        printf("%d.      %s     %d                      %d\n", a, items[a-1], b, price[a-1]*b);
         
         total += (price[a-1]*(b));
         i++;
