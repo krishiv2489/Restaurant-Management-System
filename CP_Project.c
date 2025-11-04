@@ -8,14 +8,18 @@ int table_manager();
 int login();
 void menu();
 int cost_order();
+int bill();
 
-//global array so that all functions can acces them.
+//global arrays so that all functions can acces them.
 char items[5][20] = {"Pizza","Burger","Pasta","Coffee","Salad"};
 int price[5] = {250,150,200,50,120};
 int qty[5] = {5,4,3,8,6};
-int order[5][2];
+int order[2][5];
+int total;
 
 int main() {
+
+    /*
     int who = login();
 
     switch (who) {
@@ -32,8 +36,10 @@ int main() {
         table_manager();
         break;
     default:
-        printf("Invalid choice message\n");
-}
+        printf("Invalid choice message\n");}
+    */
+    waiter();
+
 
     return 0;
 }
@@ -93,19 +99,17 @@ int login(){
     return who; //returns who has the person logged as.
 }
 
-int owner(){
+int owner(){}
 
-}
 int waiter(){
     menu();
     cost_order();
+    bill();
 }
-int chef(){
 
-}
-int table_manager(){
+int chef(){}
 
-}
+int table_manager(){}
 
 void menu(){
     printf("--------------------\n"
@@ -124,11 +128,30 @@ int cost_order(){
     printf("Just enter the index of the item!!(To exit press 0)\n");
     int j = 0;
     do{
-        int quant=0;
         scanf("%d",&order[0][j]);
-        printf("Quantity:-- ");
-        scanf("%d", &quant);
-        order[1][j] = quant;
+        if(order[0][j] == 0){
+            break; // this is if he wants to exit the order
+        }
+        printf("Quantity:- ");
+        scanf("%d", &order[1][j]);
         j++;
-    }while(order[0][j-1]!=0);
+    }while(1);
+}
+
+int bill(){
+    int i = 0;
+    total = 0;
+
+    printf("The Final Order:\n"
+           "Index   Name       Quantity         Total\n");
+
+    while(order[0][i] != 0){
+        int a = order[0][i];//item
+        int b = order[1][i];//quantity
+        printf("%d.      %s     %d          %d\n", a, items[a-1], b, price[a-1]*b);
+        
+        total += (price[a-1]*(b));
+        i++;
+    }
+    printf("The total BILL is:- %d", total);
 }
