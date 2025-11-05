@@ -220,12 +220,12 @@ int menu_change(){
     retry3:
     printf("Please Select one of the above options(1-3):-");
     scanf("%d", &opt);
-    if(opt=1){
+    if(opt==1){
         item++;
         printf("Enter the NAME of the NEW dish:- ");
         scanf("%s\n", items[item-1]);
         printf("Enter the PRICE of the NEW dish:- ");
-        scanf("%d\n", price[item-1]);
+        scanf("%d\n", &price[item-1]);
     }
     else{
         goto retry3;
