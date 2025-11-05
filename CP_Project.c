@@ -189,24 +189,35 @@ int cost_order(){
     }while(1);
 }
 
-int bill(){
+int bill() {
     int i = 0;
     total = 0;
 
     printf("The Final Order:\n"
            "Index   Name       Quantity         Total\n");
 
-    while(order[0][i] != 0){
-        int a = order[0][i];//item
-        int b = order[1][i];//quantity
-        printf("%d.      %s     %d                      %d\n", a, items[a-1], b, price[a-1]*b);
-        
-        total += (price[a-1]*(b));
+    while (order[0][i] != 0) {
+        int a = order[0][i]; // item index
+        int b = order[1][i]; // quantity
+        printf("%-5d %-10s %-10d %-10d\n", a, items[a - 1], b, price[a - 1] * b);
+        total += price[a - 1] * b;
         i++;
     }
-    printf("The total BILL is:- %d", total);
-    printf("\n");
+
+    // Added GST calculation
+    float gst = total * 0.05;  // 5% GST
+    float final_total = total + gst;
+
+    printf("---------------------------------------------\n");
+    printf("Subtotal:           Rs.%d\n", total);
+    printf("GST (5%%):           Rs.%.2f\n", gst);//.2f (.2) means rounding off to 2 decimals
+    printf("---------------------------------------------\n");
+    printf("Grand Total:        Rs.%.2f\n", final_total);
+    printf("---------------------------------------------\n\n");
+
+    return 0;
 }
+
 
 int menu_change(){
     int opt;//variable to store the preference of the owner.
