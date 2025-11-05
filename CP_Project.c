@@ -109,7 +109,48 @@ int waiter(){
 
 int chef(){}
 
-int table_manager(){}
+int table_manager()
+{
+    printf("Enter the number of guests: ");
+    scanf("%d", &guests);
+
+    printf("Tables Available: \n");
+    for(int i=0;i<10;i++)
+    {
+        if(tableCapacity[i] >= guests && tableAvailable[i] == 1)
+        {
+            printf("Table %d\n", i+1);
+        }
+    }
+    int t = table_booking();
+    int s=1;
+    for(int i=0;i<10;i++)
+    {
+        if(tableAvailable[i] == 0)
+        {
+            s++;
+        }
+    }
+    tableAvailable[t-1] = 0;
+    printf("Total Tables booked today = %d\n", s);
+    table_manager();
+}
+
+int table_booking()
+{
+    printf("Select the number of table to book: ");
+    scanf("%d", &tableBook);
+    if(tableBook > 10 || tableBook <= 0)
+    {
+        printf("No table of that number.\n");
+    }
+    else
+    {
+        printf("Table %d has been booked.\n", tableBook);
+    }
+    printf("========================================\n");
+    return tableBook;
+}
 
 void menu(){
     printf("--------------------\n"
