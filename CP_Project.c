@@ -14,10 +14,10 @@ int menu_change();
 
 //global arrays so that all functions can acces them.
 int item = 5;//no. of items in the menu.
-char items[item][20] = {"Pizza","Burger","Pasta","Coffee","Salad"};
-int price[item] = {250,150,200,50,120};
+char items[10][20] = {"Pizza","Burger","Pasta","Coffee","Salad"};
+int price[10] = {250,150,200,50,120};
 int qty[5] = {5,4,3,8,6};
-int order[2][item];
+int order[2][10];
 int total;
 int tableBook;
 
@@ -210,6 +210,9 @@ int bill(){
 
 int menu_change(){
     int opt;//variable to store the preference of the owner.
+    int opt2;//for secondary menu at the last.
+
+    retry3:
     printf("...............................\n"
            "|You have entered MENU CHANGER|\n"
            "...............................\n"
@@ -217,20 +220,80 @@ int menu_change(){
            "2. Remove a DISH from the menu.!!\n"
            "3. Change the price of a DISH.!!\n"
            "...............................\n\n");
-    retry3:
+    retry4:
     printf("Please Select one of the above options(1-3):-");
     scanf("%d", &opt);
     if(opt==1){
+
+        add_again:
         item++;
         printf("Enter the NAME of the NEW dish:- ");
-        scanf("%s\n", items[item-1]);
+        scanf(" %s", items[item-1]);
         printf("Enter the PRICE of the NEW dish:- ");
-        scanf("%d\n", &price[item-1]);
+        scanf(" %d", &price[item-1]);
+        printf("So the new MENU is:- \n");
+        menu();
+        
+    }
+    else if(opt == 2){
+    int removeIndex;
+
+    printf("\n-------- CURRENT MENU --------\n");
+    menu();
+
+    printf("Enter the number of the dish to remove: ");
+    scanf("%d", &removeIndex);
+
+    if (removeIndex < 1 || removeIndex > item) {
+        printf("Invalid dish number!\n");
+        return 0;
+    }
+
+    printf("'%s' removed from menu.\n", items[removeIndex - 1]);
+
+    for (int i = removeIndex - 1; i < item - 1; i++) {
+        strcpy(items[i], items[i + 1]);
+        price[i] = price[i + 1];
+        qty[i] = qty[i + 1];
+    }
+
+    item--;
+    printf("\nUpdated Menu:\n");
+    menu();
+
+    return 0;
+}
+    else if(opt == 3){
+        int changePriceIndex;
+        int changePrice;
+        printf("Enter the index of the dish that you what to change the price of:- ");
+        scanf("%d", &changePriceIndex);
+        printf("Enter the changed price:- ");
+        scanf("%d", &changePrice);
+        price[changePriceIndex-1] = changePrice;
+
+        printf("\nUpdated Menu:\n");
+        menu();
+
     }
     else{
-        goto retry3;
+        printf("Invalid Input!! ERROR!!\n");
+        goto retry4;
     }
+    printf("-------------------------------------\n");
+    printf("1. Do you want to add another dish??\n");
+    printf("2. Go back to MENU CHANGER??\n");
+    printf("3. EXIT menu changer!!");
+    printf("-------------------------------------\n");
+    printf("Select (1-3) from above options:- \n");
+    scanf("%d", &opt2);
+    if(opt2 == 1){goto add_again;}
+    else if(opt2 == 2){goto retry3;}
+    else if(opt2 == 3){}
+    else{printf("Invalid input.");}
+
+    }
+    
+        
 
 
-
-}
