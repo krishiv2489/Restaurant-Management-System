@@ -9,13 +9,19 @@ int login();
 void menu();
 int cost_order();
 int bill();
+int table_booking();
+int menu_change();
 
 //global arrays so that all functions can acces them.
-char items[5][20] = {"Pizza","Burger","Pasta","Coffee","Salad"};
-int price[5] = {250,150,200,50,120};
+int item = 5;//no. of items in the menu.
+char items[item][20] = {"Pizza","Burger","Pasta","Coffee","Salad"};
+int price[item] = {250,150,200,50,120};
 int qty[5] = {5,4,3,8,6};
-int order[2][5];
+int order[2][item];
 int total;
+int tableBook;
+
+
 
 int main() {
 
@@ -38,8 +44,10 @@ int main() {
     default:
         printf("Invalid choice message\n");}
     */
-    waiter();
-
+    //waiter();
+    owner();
+    //table_manager();
+    //chef();
 
     return 0;
 }
@@ -99,7 +107,9 @@ int login(){
     return who; //returns who has the person logged as.
 }
 
-int owner(){}
+int owner(){
+    menu_change();
+}
 
 int waiter(){
     menu();
@@ -108,7 +118,7 @@ int waiter(){
 }
 
 int chef(){}
-
+/*
 int table_manager()
 {
     printf("Enter the number of guests: ");
@@ -151,12 +161,12 @@ int table_booking()
     printf("========================================\n");
     return tableBook;
 }
-
+*/
 void menu(){
     printf("--------------------\n"
            "        MENU        \n"
            "--------------------\n");
-    for(int i = 0; i<5; i++){
+    for(int i = 0; i<item; i++){
         printf("%d. %s -------- %d\n", i+1, items[i], price[i]);
     }
     printf("====================\n\n");
@@ -195,4 +205,32 @@ int bill(){
         i++;
     }
     printf("The total BILL is:- %d", total);
+    printf("\n");
+}
+
+int menu_change(){
+    int opt;//variable to store the preference of the owner.
+    printf("...............................\n"
+           "|You have entered MENU CHANGER|\n"
+           "...............................\n"
+           "1. Add a DISH to menu.!!\n"
+           "2. Remove a DISH from the menu.!!\n"
+           "3. Change the price of a DISH.!!\n"
+           "...............................\n\n");
+    retry3:
+    printf("Please Select one of the above options(1-3):-");
+    scanf("%d", &opt);
+    if(opt=1){
+        item++;
+        printf("Enter the NAME of the NEW dish:- ");
+        scanf("%s\n", items[item-1]);
+        printf("Enter the PRICE of the NEW dish:- ");
+        scanf("%d\n", price[item-1]);
+    }
+    else{
+        goto retry3;
+    }
+
+
+
 }
