@@ -34,7 +34,11 @@ char quantity[15][20] = {"20 units", "10 units", "25 units", "5 packets", "1 kg"
 
 int main() {
 
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> be0d1be (Updated project)
     int who = login();
 
     switch (who) {
@@ -48,10 +52,15 @@ int main() {
         waiter();
         break;
     case 4:
-        table_manager();
+        //table_manager();
         break;
     default:
         printf("Invalid choice message\n");}
+<<<<<<< HEAD
+=======
+    
+
+>>>>>>> be0d1be (Updated project)
     return 0;
 }
 int login(){
