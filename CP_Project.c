@@ -34,15 +34,6 @@ char quantity[15][20] = {"20 units", "10 units", "25 units", "5 packets", "1 kg"
 
 int main() {
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> be0d1be (Updated project)
-=======
-
->>>>>>> d4f9ac7 (Updated project)
     int who = login();
 
     switch (who) {
@@ -60,14 +51,6 @@ int main() {
         break;
     default:
         printf("Invalid choice message\n");}
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    
-
->>>>>>> be0d1be (Updated project)
-=======
->>>>>>> d4f9ac7 (Updated project)
     return 0;
 }
 int login(){
@@ -76,14 +59,14 @@ int login(){
     int who;
 
     printf(
-        "========================================\n"
-        "           WELCOME to FAST EAT  \n"
-        "========================================\n"
-        "|  1. Login as OWNER          |\n"
-        "|  2. Login as CHEF           |\n"
-        "|  3. Login as WAITER         |\n"
-        "|  4. Login as TABLE MANAGER  |\n"
-        "========================================\n");
+        "\033[1;31m========================================\033[0m\n"
+        "\033[1;33m         WELCOME to FAST EAT \033[0m  \n"
+        "\033[1;31m========================================\033[0m\n"
+        "|\033[38;2;255;255;0m  1. Login as OWNER         \033[0m   |\n"
+        "|\033[38;2;0;255;0m  2. Login as CHEF          \033[0m   |\n"
+        "|\033[38;2;0;255;255m  3. Login as WAITER        \033[0m   |\n"
+        "|\033[1;34m  4. Login as TABLE MANAGER \033[0m   |\n"
+        "\033[1;31m========================================\033[0m\n");
     retry1:
         printf("Select an option (1-4): ");
         scanf("%d",&who);
@@ -95,7 +78,7 @@ int login(){
     }
     retry2:
     printf(
-        "\n------------ LOGIN PORTAL ------------\n");
+        "\n\033[1;31m------------ \033[1;33m LOGIN PORTAL\033[1;31m------------\033[0m\n");
 
     printf("USERNAME / ID:-- ");
     scanf("%s",&usr);
@@ -103,7 +86,7 @@ int login(){
     printf("PASSWORD:-- ");
     scanf("%s",&pass);
 
-    printf("--------------------------------------\n");
+    printf("\033[1;31m--------------------------------------\033[0m\n");
 
 
     if(strcmp(usr, "owner") == 0 && strcmp(pass, "owner_123") == 0){
@@ -175,24 +158,24 @@ int table_booking()
     {
         printf("Table %d has been booked.\n", tableBook);
     }
-    printf("========================================\n");
+    printf("\033[1;31m========================================\033[0m\n");
     return tableBook;
 }
 
 void menu(){
-    printf("--------------------\n"
-           "        MENU        \n"
-           "--------------------\n");
+    printf("\033[1;31m--------------------\033[0m\n"
+           "      \033[1;33m   MENU   \033[0m     \n"
+           "\033[1;31m--------------------\033[0m\n");
     for(int i = 0; i<item; i++){
         printf("%d. %s -------- %d\n", i+1, items[i], price[i]);
     }
-    printf("====================\n\n");
+    printf("\033[1;31m====================\033[0m\n\n");
 }
 
 int cost_order(){
 
     printf("ORDER Initialized!!");
-    printf("--------------------------------\n");
+    printf("\033[1;31m--------------------------------\033[0m\n");
     printf("Just enter the index of the item!!(To exit press 0)\n");
     int j = 0;
     do{
@@ -221,33 +204,30 @@ int bill() {
         i++;
     }
 
-    // Added GST calculation
-    float gst = total * 0.05;  // 5% GST
+    float gst = total * 0.18;  
     float final_total = total + gst;
-
-    printf("---------------------------------------------\n");
-    printf("Subtotal:           Rs.%d\n", total);
-    printf("GST (5%%):           Rs.%.2f\n", gst);//.2f (.2) means rounding off to 2 decimals
-    printf("---------------------------------------------\n");
-    printf("Grand Total:        Rs.%.2f\n", final_total);
-    printf("---------------------------------------------\n\n");
+    printf("033[1;31m---------------------------------------------\033[0m\n");
+    printf("\033[1;33m Subtotal:\033[0m           Rs.%d\n", total);
+    printf("\033[1;33m GST (18%%\033[0m):           Rs.%.2f\n", gst);//.2f (.2) means rounding off to 2 decimals
+    printf("033[1;31m---------------------------------------------\033[0m\n");
+    printf("\033[1;33m Grand Tot\033[0mal:        Rs.%.2f\n", final_total);
+    printf("033[1;31m---------------------------------------------\033[0m\n\n");
 
     return 0;
 }
-
 
 int menu_change(){
     int opt;//variable to store the preference of the owner.
     int opt2;//for secondary menu at the last.
 
     retry3:
-    printf("===============================\n"
-           "|You have entered MENU CHANGER|\n"
-           "===============================\n"
+    printf("\033[1;31m===============================\033[0m\n"
+           "|\033[1;33m You have entered MENU CHANGER\033[0m|\n"
+           "\033[1;31m===============================\033[0m\n"
            "1. Add a DISH to menu.!!\n"
            "2. Remove a DISH from the menu.!!\n"
            "3. Change the price of a DISH.!!\n"
-           "================================\n\n");
+           "\033[1;31m================================\033[0m\n\n");
     retry4:
     printf("Please Select one of the above options(1-3):- ");
     scanf("%d", &opt);
@@ -266,7 +246,7 @@ int menu_change(){
     else if(opt == 2){
     int removeIndex;
 
-    printf("\n-------- CURRENT MENU --------\n");
+    printf("\n\033[1;31m-------- \033[1;33m CURRENT M\033[0mENU --------\033[0m\n");
     menu();
 
     printf("Enter the number of the dish to remove: ");
@@ -308,11 +288,11 @@ int menu_change(){
         printf("Invalid Input!! ERROR!!\n");
         goto retry4;
     }
-    printf("-------------------------------------\n");
+    printf("\033[1;31m-------------------------------------\033[0m\n");
     printf("1. Do you want to add another dish??\n");
     printf("2. Go back to MENU CHANGER??\n");
     printf("3. EXIT menu changer!!\n");
-    printf("-------------------------------------\n");
+    printf("\033[1;31m-------------------------------------\033[0m\n");
     printf("Select (1-3) from above options:- \n");
     scanf("%d", &opt2);
     if(opt2 == 1){goto add_again;}
@@ -325,13 +305,13 @@ int menu_change(){
 int chef()
 {
     int chef1;
-    printf("=================================\n"
-           "|You have entered CHEF's ARSENAL|\n"
-           "=================================\n"
+    printf("\033[1;31m=================================\033[0m\n"
+           "|\033[1;33m You have \033[0mentered CHEF's ARSENAL|\n"
+           "\033[1;31m=================================\033[0m\n"
            "1. Cooking Counter!\n"
            "2. Check the INGREDIENTS!\n"
            "3. Write a NOTE to owner!\n"
-           "=================================\n\n");
+           "\033[1;31m=================================\033[0m\n\n");
            printf("Please Select one of the above options(1-3):- ");
            scanf("%d", &chef1);
            if(chef1 == 1)
@@ -353,14 +333,14 @@ int note(){}
 void ingredients()
 {
     int ingredients1, ingredients2;
-    printf("------------------------------\n"
-           "|You have entered INGREDIENTS|\n"
-           "------------------------------\n"
+    printf("\033[1;31m------------------------------\033[0m\n"
+           "|\033[1;33m You have \033[0mentered INGREDIENTS|\n"
+           "\033[1;31m------------------------------\033[0m\n"
            "1. Check the quantity of INGREDIENTS!\n"
            "2. Add NEW Ingredients!\n"
            "3. Add a Special Item to the Menu!\n"
            "4. Return to ARSENAL!\n"
-           "----------------------------------\n\n");
+           "\033[1;31m----------------------------------\033[0m\n\n");
            printf("Please Select one of the above options(1-3):- ");
            scanf("%d", &ingredients1);
            int j=9;
@@ -402,8 +382,4 @@ void ingredients()
            {
                chef();
            }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> d4f9ac7 (Updated project)
