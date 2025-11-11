@@ -31,6 +31,7 @@ int tableCapacity[10] = {2,2,2,4,4,4,4,6,6,8};
 int tableAvailable[10] = {1,1,1,1,1,1,1,1,1,1};
 char ing[15][20] = {"Tomato", "Onion", "Lettuce", "Buns/Bread", "Cheese", "Milk", "Olive Oil", "Salt", "Ketchup"};
 char quantity[15][20] = {"20 units", "10 units", "25 units", "5 packets", "1 kg", "3 Litres", "500 mL", "500 grams", "75 sachets"};
+char note1[500];
 
 int main() {
 
@@ -204,7 +205,7 @@ int bill() {
         i++;
     }
 
-    float gst = total * 0.18;  
+    float gst = total * 0.18;
     float final_total = total + gst;
     printf("033[1;31m---------------------------------------------\033[0m\n");
     printf("\033[1;33m Subtotal:\033[0m           Rs.%d\n", total);
@@ -311,8 +312,9 @@ int chef()
            "1. Cooking Counter!\n"
            "2. Check the INGREDIENTS!\n"
            "3. Write a NOTE to owner!\n"
+           "4. Logout\n"
            "\033[1;31m=================================\033[0m\n\n");
-           printf("Please Select one of the above options(1-3):- ");
+           printf("Please Select one of the above options(1-4):- ");
            scanf("%d", &chef1);
            if(chef1 == 1)
            {
@@ -326,10 +328,44 @@ int chef()
            {
                note();
            }
+           else if(chef1==4)
+           {
+               main();
+           }
            return 0;
 }
-int cook_count(){printf("Hello");}
-int note(){}
+int cook_count()
+{
+    /*int i=0;
+    printf("You got an Order!");
+    while(order[0][i] != 0)
+    {
+        int a = order[i][0];
+        printf("%s - %d", menu[1][a-1], order[1][i])
+    }*/
+}
+int note()
+{
+    int note2;
+
+    int ch;
+    while ((ch = getchar()) != '\n' && ch != EOF);
+    printf("Write a note to Owner: \n");
+    fgets(note1, sizeof(note1), stdin);
+    note1[strcspn(note1, "\n")] = 0;
+    printf("Your note has been submitted to the Owner.\n\n");
+    printf("Would you like to write another note?\n"
+           "1. Yes\n"
+           "2. No. Return to Chef's Arsenal\n");
+    printf("Please Select one of the above options:- ");
+    scanf("%d", &note2);
+    if(note2==1)
+        {
+            note();
+        }
+    else {chef();}
+
+}
 void ingredients()
 {
     int ingredients1, ingredients2;
@@ -338,8 +374,7 @@ void ingredients()
            "\033[1;31m------------------------------\033[0m\n"
            "1. Check the quantity of INGREDIENTS!\n"
            "2. Add NEW Ingredients!\n"
-           "3. Add a Special Item to the Menu!\n"
-           "4. Return to ARSENAL!\n"
+           "3. Return to ARSENAL!\n"
            "\033[1;31m----------------------------------\033[0m\n\n");
            printf("Please Select one of the above options(1-3):- ");
            scanf("%d", &ingredients1);
@@ -375,10 +410,6 @@ void ingredients()
                }
            }
            else if(ingredients1 == 3)
-           {
-
-           }
-           else if(ingredients1 == 4)
            {
                chef();
            }
