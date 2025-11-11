@@ -16,6 +16,7 @@ int table_booking();
 void ingredients();
 int note();
 int cook_count();
+int revenue();
 
 //global arrays so that all functions can acces them.
 int item = 5;//no. of items in the menu.
@@ -61,7 +62,7 @@ int login(){
 
     printf(
         "\033[1;31m========================================\033[0m\n"
-        "\033[1;33m         WELCOME to FAST EAT \033[0m  \n"
+        "       WELCOME to FAST EAT   \n"
         "\033[1;31m========================================\033[0m\n"
         "|\033[38;2;255;255;0m  1. Login as OWNER         \033[0m   |\n"
         "|\033[38;2;0;255;0m  2. Login as CHEF          \033[0m   |\n"
@@ -79,7 +80,7 @@ int login(){
     }
     retry2:
     printf(
-        "\n\033[1;31m------------ \033[1;33m LOGIN PORTAL\033[1;31m------------\033[0m\n");
+        "\n\033[1;31m------------ \033[38;2;255;255;0m LOGIN PORTAL\033[1;31m  ------------\033[0m\n");
 
     printf("USERNAME / ID:-- ");
     scanf("%s",&usr);
@@ -111,7 +112,34 @@ int login(){
 }
 
 int owner(){
-    menu_change();
+    int choice;
+    menu:
+    printf("\n\033[1;31m----------------------------------\033[0m\n"
+           "       \033[38;2;255;255;0m  OWNER CONTROL PANEL\033[0m\n"
+           "\033[1;31m----------------------------------\033[0m\n"
+           "1. Menu Management\n"
+           "2. Inventory Management\n"
+           "3. View Sales / Revenue\n"
+           "4. Return to Main Menu\n"
+           "\033[1;31m----------------------------------\033[0m\n");
+    printf("Enter your choice:-");
+    scanf("%d", &choice);
+    if(choice==1){
+        menu_change();
+    }
+    else if(choice==2){
+        
+    }
+    else if(choice==3){
+        
+    }
+    else if(choice==4){
+        main();
+    }
+    else{
+        printf("Invalid Input!!");
+        goto menu;
+    }
 }
 
 int waiter(){
@@ -165,7 +193,7 @@ int table_booking()
 
 void menu(){
     printf("\033[1;31m--------------------\033[0m\n"
-           "      \033[1;33m   MENU   \033[0m     \n"
+           "      \033[38;2;255;255;0m   MENU   \033[0m     \n"
            "\033[1;31m--------------------\033[0m\n");
     for(int i = 0; i<item; i++){
         printf("%d. %s -------- %d\n", i+1, items[i], price[i]);
@@ -223,7 +251,7 @@ int menu_change(){
 
     retry3:
     printf("\033[1;31m===============================\033[0m\n"
-           "|\033[1;33m You have entered MENU CHANGER\033[0m|\n"
+           "|\033[38;2;255;255;0m You have entered MENU CHANGER\033[0m|\n"
            "\033[1;31m===============================\033[0m\n"
            "1. Add a DISH to menu.!!\n"
            "2. Remove a DISH from the menu.!!\n"
@@ -247,7 +275,7 @@ int menu_change(){
     else if(opt == 2){
     int removeIndex;
 
-    printf("\n\033[1;31m-------- \033[1;33m CURRENT M\033[0mENU --------\033[0m\n");
+    printf("\n\033[1;31m-------- \033[38;2;255;255;0m CURRENT MENU\033[0m --------\033[0m\n");
     menu();
 
     printf("Enter the number of the dish to remove: ");
@@ -307,7 +335,7 @@ int chef()
 {
     int chef1;
     printf("\033[1;31m=================================\033[0m\n"
-           "|\033[1;33m You have \033[0mentered CHEF's ARSENAL|\n"
+           "|\033[1;33m You have entered CHEF's ARSENAL \033[0m|\n"
            "\033[1;31m=================================\033[0m\n"
            "1. Cooking Counter!\n"
            "2. Check the INGREDIENTS!\n"
@@ -370,7 +398,7 @@ void ingredients()
 {
     int ingredients1, ingredients2;
     printf("\033[1;31m------------------------------\033[0m\n"
-           "|\033[1;33m You have \033[0mentered INGREDIENTS|\n"
+           "|\033[1;33m You have entered INGREDIENTS\033[0m|\n"
            "\033[1;31m------------------------------\033[0m\n"
            "1. Check the quantity of INGREDIENTS!\n"
            "2. Add NEW Ingredients!\n"
