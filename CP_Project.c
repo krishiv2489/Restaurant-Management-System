@@ -9,8 +9,13 @@ int login();
 void menu();
 int cost_order();
 int bill();
-int table_booking();
 int menu_change();
+int tableBook;
+int guests;
+int table_booking();
+void ingredients();
+int note();
+int cook_count();
 
 //global arrays so that all functions can acces them.
 int item = 5;//no. of items in the menu.
@@ -20,12 +25,16 @@ int qty[5] = {5,4,3,8,6};
 int order[2][10];
 int total;
 int tableBook;
-
-
+char table[5][20] = {"Table 1", "Table 2", "Table 3", "Table 4", "Table 5"};
+int tableNum[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+int tableCapacity[10] = {2,2,2,4,4,4,4,6,6,8};
+int tableAvailable[10] = {1,1,1,1,1,1,1,1,1,1};
+char ing[15][20] = {"Tomato", "Onion", "Lettuce", "Buns/Bread", "Cheese", "Milk", "Olive Oil", "Salt", "Ketchup"};
+char quantity[15][20] = {"20 units", "10 units", "25 units", "5 packets", "1 kg", "3 Litres", "500 mL", "500 grams", "75 sachets"};
 
 int main() {
 
-    /*
+
     int who = login();
 
     switch (who) {
@@ -43,12 +52,6 @@ int main() {
         break;
     default:
         printf("Invalid choice message\n");}
-    */
-    //waiter();
-    owner();
-    //table_manager();
-    //chef();
-
     return 0;
 }
 int login(){
@@ -68,7 +71,7 @@ int login(){
     retry1:
         printf("Select an option (1-4): ");
         scanf("%d",&who);
-    
+
     //if the user input 5 or 0.
     if(who!=1 && who!=2 && who!=3 && who!=4){
         printf("Invalid Input!! Error!!\n");
@@ -86,7 +89,7 @@ int login(){
 
     printf("--------------------------------------\n");
 
-    
+
     if(strcmp(usr, "owner") == 0 && strcmp(pass, "owner_123") == 0){
         printf("Succesfully LOGGED IN as %s!!\n", usr);
     }
@@ -117,8 +120,6 @@ int waiter(){
     bill();
 }
 
-int chef(){}
-/*
 int table_manager()
 {
     printf("Enter the number of guests: ");
@@ -161,7 +162,7 @@ int table_booking()
     printf("========================================\n");
     return tableBook;
 }
-*/
+
 void menu(){
     printf("--------------------\n"
            "        MENU        \n"
@@ -224,15 +225,15 @@ int menu_change(){
     int opt2;//for secondary menu at the last.
 
     retry3:
-    printf("...............................\n"
+    printf("===============================\n"
            "|You have entered MENU CHANGER|\n"
-           "...............................\n"
+           "===============================\n"
            "1. Add a DISH to menu.!!\n"
            "2. Remove a DISH from the menu.!!\n"
            "3. Change the price of a DISH.!!\n"
-           "...............................\n\n");
+           "================================\n\n");
     retry4:
-    printf("Please Select one of the above options(1-3):-");
+    printf("Please Select one of the above options(1-3):- ");
     scanf("%d", &opt);
     if(opt==1){
 
@@ -244,7 +245,7 @@ int menu_change(){
         scanf(" %d", &price[item-1]);
         printf("So the new MENU is:- \n");
         menu();
-        
+
     }
     else if(opt == 2){
     int removeIndex;
@@ -294,7 +295,7 @@ int menu_change(){
     printf("-------------------------------------\n");
     printf("1. Do you want to add another dish??\n");
     printf("2. Go back to MENU CHANGER??\n");
-    printf("3. EXIT menu changer!!");
+    printf("3. EXIT menu changer!!\n");
     printf("-------------------------------------\n");
     printf("Select (1-3) from above options:- \n");
     scanf("%d", &opt2);
@@ -304,7 +305,85 @@ int menu_change(){
     else{printf("Invalid input.");}
 
     }
-    
-        
 
+int chef()
+{
+    int chef1;
+    printf("=================================\n"
+           "|You have entered CHEF's ARSENAL|\n"
+           "=================================\n"
+           "1. Cooking Counter!\n"
+           "2. Check the INGREDIENTS!\n"
+           "3. Write a NOTE to owner!\n"
+           "=================================\n\n");
+           printf("Please Select one of the above options(1-3):- ");
+           scanf("%d", &chef1);
+           if(chef1 == 1)
+           {
+               cook_count();
+           }
+           if(chef1 == 2)
+           {
+               ingredients();
+           }
+           if(chef1 == 3)
+           {
+               note();
+           }
+           return 0;
+}
+int cook_count(){printf("Hello");}
+int note(){}
+void ingredients()
+{
+    int ingredients1, ingredients2;
+    printf("------------------------------\n"
+           "|You have entered INGREDIENTS|\n"
+           "------------------------------\n"
+           "1. Check the quantity of INGREDIENTS!\n"
+           "2. Add NEW Ingredients!\n"
+           "3. Add a Special Item to the Menu!\n"
+           "4. Return to ARSENAL!\n"
+           "----------------------------------\n\n");
+           printf("Please Select one of the above options(1-3):- ");
+           scanf("%d", &ingredients1);
+           int j=9;
 
+           if(ingredients1 == 1)
+           {
+               printf("Ingredients: \n\n");
+               for(int i=0;i<15;i++)
+               {
+                   if(ing[i][1] == '\0' || quantity[i][1] == '\0'){break;}
+                   printf("%s - %s\n", ing[i], quantity[i]);
+               }
+           }
+           else if(ingredients1 == 2)
+           {
+               add_ingredients:
+               printf("Enter the name of ingredient to add: ");
+               scanf("%s", &ing[j+1]);
+               printf("Enter the quantity of ingredient: ");
+               scanf("%s", &quantity[j+1]);
+               j++;
+               printf("Would you like to add another ingredient?\n");
+               printf("1. Yes\n");
+               printf("2. No. Return to Ingredients\n");
+               printf("Please Select one of the options:- ");
+               scanf(" %d", &ingredients2);
+               if(ingredients2 == 1)
+                {goto add_ingredients;}
+               else if(ingredients2 == 2)
+               {
+                   ingredients();
+               }
+           }
+           else if(ingredients1 == 3)
+           {
+
+           }
+           else if(ingredients1 == 4)
+           {
+               chef();
+           }
+}
