@@ -16,7 +16,7 @@ int table_booking();
 void ingredients();
 int note();
 int cook_count();
-//int revenue();
+int revenue_count();
 
 //global arrays so that all functions can acces them.
 int item = 5;//no. of items in the menu.
@@ -33,7 +33,8 @@ int tableAvailable[10] = {1,1,1,1,1,1,1,1,1,1};
 char ing[15][20] = {"Tomato", "Onion", "Lettuce", "Buns/Bread", "Cheese", "Milk", "Olive Oil", "Salt", "Ketchup"};
 char quantity[15][20] = {"20 units", "10 units", "25 units", "5 packets", "1 kg", "3 Litres", "500 mL", "500 grams", "75 sachets"};
 char note1[500];
-int revenue=0;
+float revenue=0;
+int costumers=0;
 
 int main() {
 
@@ -92,19 +93,19 @@ int login(){
 
 
     if(strcmp(usr, "owner") == 0 && strcmp(pass, "owner_123") == 0){
-        printf("Succesfully LOGGED IN as %s!!\n", usr);
+        printf("\033[38;2;0;255;0mSuccesfully LOGGED IN as %s!!\033[0m\n", usr);
     }
     else if(strcmp(usr, "chef") == 0 && strcmp(pass, "chef_123") == 0){
-        printf("Succesfully LOGGED IN as %s!!\n", usr);
+        printf("\033[38;2;0;255;0mSuccesfully LOGGED IN as %s!!\033[0m\n", usr);
     }
     else if(strcmp(usr, "waiter") == 0 && strcmp(pass, "waiter_123") == 0){
-        printf("Succesfully LOGGED IN as %s!!\n", usr);
+        printf("\033[38;2;0;255;0mSuccesfully LOGGED IN as %s!!\033[0m\n", usr);
     }
     else if(strcmp(usr, "table_man") == 0 && strcmp(pass, "table_man_123") == 0){
-        printf("Succesfully LOGGED IN as %s!!\n", usr);
+        printf("\033[38;2;0;255;0mSuccesfully LOGGED IN as %s!!\033[0m\n", usr);
     }
     else{
-        printf("LOGIN CREDENTIALS are INCORRECT!!\n");
+        printf("\033[1;31mLOGIN CREDENTIALS are INCORRECT!!\033[0m\n");
         goto retry2;
     }
     printf("\n");
@@ -294,20 +295,64 @@ int bill() {
     }
 
 }
+int revenue_count(){
+    int opt2;
+    int choice;
+    menu:
+    printf("\n\033[1;31m----------------------------------\033[0m\n"
+           "       \033[38;2;255;255;0m  Revenue Viewer\033[0m\n"
+           "\033[1;31m----------------------------------\033[0m\n"
+           "\033[38;2;255;255;0m 1. Today's Revenue\n\033[0m"
+           "\033[38;2;0;255;0m 2. Total Costumers today\n\033[0m"
+           "\033[38;2;0;255;255m 3. Return to Owner Control Panel\n\033[0m"
+           "\033[1;34m 4. LOG OUT\n\033[0m"
+           "\033[1;31m----------------------------------\033[0m\n");
+    retry:
+    printf("Please Select one of the above options:- ");
+    scanf("%d", &choice);
+    if(choice==1){
+        printf("Today' Toatal Revenue is:- %f\n", revenue);
+    }
+    else if(choice==2){
+        printf("Today's Inflow Of costumers:- %d\n", costumers);
+    }
+    else if(choice==3){
+        owner();
+    }
+    else if(choice==4){
+        main();
+    }
+    else{
+        printf("\033[1;31mInvalid input.\033[0m\n");
+        goto retry;
+    }
+    printf("\033[1;31m-------------------------------------\033[0m\n");
+    printf("\033[38;2;255;255;0m 1. Return to Revenue Viewer??\033[0m\n");
+    printf("\033[38;2;0;255;0m 2. Go back to Owner Control Panel??\033[0m\n");
+    printf("\033[38;2;0;255;255m 3. Log Out!!\033[0m\n");
+    printf("\033[1;31m-------------------------------------\033[0m\n");
+    printf("Select (1-3) from above options:- \n");
+    scanf("%d", &opt2);
+    if(opt2 == 1){goto menu;}
+    else if(opt2 == 2){owner();}
+    else if(opt2 == 3){main();}
+    else{printf("\033[1;31mInvalid input.\033[0m\n");}
+}
+
 
 int menu_change(){
     int opt;//variable to store the preference of the owner.
     int opt2;//for secondary menu at the last.
 
     retry3:
-    printf("\033[1;31m===============================\033[0m\n"
+    printf("\033[1;31m----------------------------------\033[0m\n"
            "|\033[38;2;255;255;0m You have entered MENU CHANGER\033[0m|\n"
-           "\033[1;31m===============================\033[0m\n"
+           "\033[1;31m----------------------------------\033[0m\n"
            "\033[38;2;255;255;0m 1. Add a DISH to menu.!!\033[0m\n"
            "\033[38;2;0;255;0m 2. Remove a DISH from the menu.!!\033[0m\n"
            "\033[38;2;0;255;255m 3. Change the price of a DISH.!!\033[0m\n"
            "\033[1;34m 4. Return to OWNER CONTROL PANEL\n\033[0m"
-           "\033[1;31m================================\033[0m\n\n");
+           "\033[1;31m----------------------------------\033[0m\n\n");
     retry4:
     printf("Please Select one of the above options(1-3):- ");
     scanf("%d", &opt);
@@ -326,7 +371,7 @@ int menu_change(){
     else if(opt == 2){
     int removeIndex;
 
-    printf("\n\033[1;31m-------- \033[38;2;255;255;0m CURRENT MENU\033[0m --------\033[0m\n");
+    printf("\n\033[1;31m-------- \033[38;2;255;255;0m CURRENT MENU\033[0m\033[1;31m --------\033[0m\n");
     menu();
 
     printf("Enter the number of the dish to remove: ");
@@ -455,9 +500,9 @@ void ingredients()
     printf("\033[1;31m------------------------------\033[0m\n"
            "|\033[1;33m You have entered INGREDIENTS\033[0m|\n"
            "\033[1;31m------------------------------\033[0m\n"
-           "\033[38;2;255;255;0m 1. Check the quantity of INGREDIENTS!\033[0m\n"
+           "\033[38;2;255;255;0m1. Check the quantity of INGREDIENTS!\033[0m\n"
            "\033[38;2;0;255;0m2. Add NEW Ingredients!\033[0m\n"
-           "\033[38;2;0;255;255m3. Return to ARSENAL!\\033[0mn"
+           "\033[38;2;0;255;255m3. Return to ARSENAL!\\033[0m\n"
            "\033[1;31m----------------------------------\033[0m\n\n");
            printf("Please Select one of the above options(1-3):- ");
            scanf("%d", &ingredients1);
