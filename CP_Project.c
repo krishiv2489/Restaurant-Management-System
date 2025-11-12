@@ -545,5 +545,6 @@ void ingredients()
 //to do
 //chef counter
 //return to menu in menu changer
-//revenue
 //inventory
+//fix table managing sys
+//main menu in table man
