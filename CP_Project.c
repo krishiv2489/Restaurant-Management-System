@@ -16,7 +16,7 @@ int table_booking();
 void ingredients();
 int note();
 int cook_count();
-int revenue();
+//int revenue();
 
 //global arrays so that all functions can acces them.
 int item = 5;//no. of items in the menu.
@@ -33,6 +33,7 @@ int tableAvailable[10] = {1,1,1,1,1,1,1,1,1,1};
 char ing[15][20] = {"Tomato", "Onion", "Lettuce", "Buns/Bread", "Cheese", "Milk", "Olive Oil", "Salt", "Ketchup"};
 char quantity[15][20] = {"20 units", "10 units", "25 units", "5 packets", "1 kg", "3 Litres", "500 mL", "500 grams", "75 sachets"};
 char note1[500];
+int revenue=0;
 
 int main() {
 
@@ -79,8 +80,7 @@ int login(){
         goto retry1;
     }
     retry2:
-    printf(
-        "\n\033[1;31m------------ \033[38;2;255;255;0m LOGIN PORTAL\033[1;31m  ------------\033[0m\n");
+    printf("\n\033[1;31m------------ \033[38;2;255;255;0m LOGIN PORTAL\033[1;31m  ------------\033[0m\n");
 
     printf("USERNAME / ID:-- ");
     scanf("%s",&usr);
@@ -120,7 +120,7 @@ int owner(){
            "\033[38;2;255;255;0m 1. Menu Management\n\033[0m"
            "\033[38;2;0;255;0m 2. Inventory Management\n\033[0m"
            "\033[38;2;0;255;255m 3. View Sales / Revenue\n\033[0m"
-           "\033[1;34m 4. Return to Main Menu\n\033[0m"
+           "\033[1;34m 4. LOG OUT\n\033[0m"
            "\033[1;31m----------------------------------\033[0m\n");
     printf("Enter your choice:-");
     scanf("%d", &choice);
@@ -250,6 +250,7 @@ int cost_order(){
 int bill() {
     int i = 0;
     total = 0;
+    int choice;
 
     printf("The Final Order:\n"
            "Index  Name    Quantity     Total\n");
@@ -266,12 +267,32 @@ int bill() {
     float final_total = total + gst;
     printf("\033[1;31m---------------------------------------------\033[0m\n");
     printf("\033[1;33m Subtotal:\033[0m            \033[38;2;0;255;0m Rs.%d\n\033[0m", total);
-    printf("\033[1;33m GST (18%%):\033[0m          \033[38;2;0;255;0m Rs.%.2f\n\033[0m", gst);//.2f (.2) means rounding off to 2 decimals
+    printf("\033[1;33m GST (18%%):\033[0m           \033[38;2;0;255;0m Rs.%.2f\n\033[0m", gst);//.2f (.2) means rounding off to 2 decimals
     printf("\033[1;31m---------------------------------------------\033[0m\n");
-    printf("\033[1;33m Grand Totmal: \033[0        \033[38;2;0;255;0m Rs.%.2f\n\033[0m", final_total);
+    printf("\033[1;33m Grand Totmal: \033[0                \033[38;2;0;255;0m Rs.%.2f\n\033[0m", final_total);
     printf("\033[1;31m---------------------------------------------\033[0m\n\n");
 
-    return 0;
+    revenue += final_total;
+
+    printf("What would you like to do next?\n"
+           "\033[1;31m-------------------------------------\033[0m\n"
+           "\033[38;2;255;255;0m1. Take another order \033[0m\n"
+           "\033[38;2;0;255;0m2. Log Out \033[0m\n");
+    printf("\033[1;31m-------------------------------------\033[0m\n");
+    retry:
+    printf("Please Select one of the above options:- ");
+    scanf("%d", &choice);
+    if(choice==1){
+        waiter();
+    }
+    else if(choice==2){
+        main();
+    }
+    else{
+        printf("\033[1;31mInvalid input.\033[0m\n");
+        goto retry;
+    }
+
 }
 
 int menu_change(){
@@ -285,6 +306,7 @@ int menu_change(){
            "\033[38;2;255;255;0m 1. Add a DISH to menu.!!\033[0m\n"
            "\033[38;2;0;255;0m 2. Remove a DISH from the menu.!!\033[0m\n"
            "\033[38;2;0;255;255m 3. Change the price of a DISH.!!\033[0m\n"
+           "\033[1;34m 4. Return to OWNER CONTROL PANEL\n\033[0m"
            "\033[1;31m================================\033[0m\n\n");
     retry4:
     printf("Please Select one of the above options(1-3):- ");
@@ -332,6 +354,7 @@ int menu_change(){
     else if(opt == 3){
         int changePriceIndex;
         int changePrice;
+        menu();
         printf("Enter the index of the dish that you what to change the price of:- ");
         scanf("%d", &changePriceIndex);
         printf("Enter the changed price:- ");
@@ -341,6 +364,9 @@ int menu_change(){
         printf("\nUpdated Menu:\n");
         menu();
 
+    }
+    else if(opt == 4){
+        owner();
     }
     else{
         printf("\033[1;31mInvalid Input!! ERROR!!\033[0m\n");
@@ -355,7 +381,7 @@ int menu_change(){
     scanf("%d", &opt2);
     if(opt2 == 1){goto add_again;}
     else if(opt2 == 2){goto retry3;}
-    else if(opt2 == 3){}
+    else if(opt2 == 3){main();}
     else{printf("\033[1;31mInvalid input.\033[0m\n");}
 
     }
@@ -471,3 +497,8 @@ void ingredients()
                chef();
            }
 }
+//to do
+//chef counter
+//return to menu in menu changer
+//revenue
+//inventory
