@@ -129,10 +129,10 @@ int owner(){
         menu_change();
     }
     else if(choice==2){
-        
+
     }
     else if(choice==3){
-        
+
     }
     else if(choice==4){
         main();
@@ -172,14 +172,31 @@ int waiter(){
         printf("\033[1;31mInvalid input.\033[0m\n");
         goto retry;
     }
-    
-    
-    
+
+
+
 }
 
 int table_manager()
 {
-    printf("Enter the number of guests: ");
+    int tm1;
+    printf("\033[1;31m=================================\033[0m\n"
+           "|\033[1;33m You have entered TABLE MANAGER \033[0m|\n"
+           "\033[1;31m=================================\033[0m\n"
+           "\033[38;2;0;255;255m1. Book a Table.\033[0m\n"
+           "\033[1;34m2. Logout\033[0m\n"
+           "\033[1;31m=================================\033[0m\n\n");
+           printf("Please Select one of the above options:- ");
+           tm2:
+           scanf("%d", &tm1);
+
+           if (tm1 == 2)
+           {
+               main();
+           }
+           else if (tm1 == 1)
+           {
+               printf("Enter the number of guests: ");
     scanf("%d", &guests);
 
     printf("Tables Available: \n");
@@ -202,6 +219,13 @@ int table_manager()
     tableAvailable[t-1] = 0;
     printf("Total Tables booked today = %d\n", s);
     table_manager();
+           }
+           else
+           {
+               printf("Invalid selection, Please try again: ");
+               goto tm2;
+           }
+
 }
 
 int table_booking()
@@ -437,28 +461,29 @@ int chef()
     printf("\033[1;31m=================================\033[0m\n"
            "|\033[1;33m You have entered CHEF's ARSENAL \033[0m|\n"
            "\033[1;31m=================================\033[0m\n"
-           "\033[38;2;255;255;0m1. Cooking Counter!\033[0m\n"
-           "\033[38;2;0;255;0m2. Check the INGREDIENTS!\033[0m\n"
-           "\033[38;2;0;255;255m3. Write a NOTE to owner!\033[0m\n"
-           "\033[1;34m4. Logout\033[0m\n"
+           "\033[38;2;0;255;0m1. Check the INGREDIENTS!\033[0m\n"
+           "\033[38;2;0;255;255m2. Write a NOTE to owner!\033[0m\n"
+           "\033[1;34m3. Logout\033[0m\n"
            "\033[1;31m=================================\033[0m\n\n");
-           printf("Please Select one of the above options(1-4):- ");
+           printf("Please Select one of the above options(1-3):- ");
+           chef2:
            scanf("%d", &chef1);
            if(chef1 == 1)
            {
-               cook_count();
+               ingredients();
            }
            if(chef1 == 2)
            {
-               ingredients();
+               note();
            }
            if(chef1 == 3)
            {
-               note();
-           }
-           else if(chef1==4)
-           {
                main();
+           }
+           else
+           {
+               printf("Invalid Selection, Please select again");
+               goto chef2;
            }
            return 0;
 }
@@ -547,4 +572,3 @@ void ingredients()
 //return to menu in menu changer
 //inventory
 //fix table managing sys
-//main menu in table man
