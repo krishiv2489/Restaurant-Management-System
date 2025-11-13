@@ -119,9 +119,8 @@ int owner(){
            "       \033[38;2;255;255;0m  OWNER CONTROL PANEL\033[0m\n"
            "\033[1;31m----------------------------------\033[0m\n"
            "\033[38;2;255;255;0m 1. Menu Management\n\033[0m"
-           "\033[38;2;0;255;0m 2. Inventory Management\n\033[0m"
-           "\033[38;2;0;255;255m 3. View Sales / Revenue\n\033[0m"
-           "\033[1;34m 4. LOG OUT\n\033[0m"
+           "\033[38;2;0;255;0m 2. View Sales / Revenue\n\033[0m"
+           "\033[38;2;0;255;255m 3. LOG OUT\n\033[0m"
            "\033[1;31m----------------------------------\033[0m\n");
     printf("Enter your choice:-");
     scanf("%d", &choice);
@@ -129,12 +128,9 @@ int owner(){
         menu_change();
     }
     else if(choice==2){
-
+        revenue_count();
     }
     else if(choice==3){
-
-    }
-    else if(choice==4){
         main();
     }
     else{
@@ -298,6 +294,7 @@ int bill() {
     printf("\033[1;31m---------------------------------------------\033[0m\n\n");
 
     revenue += final_total;
+    costumers++;
 
     printf("What would you like to do next?\n"
            "\033[1;31m-------------------------------------\033[0m\n"
@@ -417,8 +414,6 @@ int menu_change(){
     item--;
     printf("\nUpdated Menu:\n");
     menu();
-
-    return 0;
 }
     else if(opt == 3){
         int changePriceIndex;
