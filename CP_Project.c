@@ -54,10 +54,9 @@ int main() {
         table_manager();
         break;
     case 5:
-        goto exit;
+        return 0;
     default:
         printf("Invalid choice message\n");}
-    exit:
     return 0;
 }
 int login(){
@@ -73,15 +72,15 @@ int login(){
         "|\033[38;2;0;255;0m  2. Login as CHEF          \033[0m   |\n"
         "|\033[38;2;0;255;255m  3. Login as WAITER        \033[0m   |\n"
         "|\033[1;34m  4. Login as TABLE MANAGER \033[0m   |\n"
-        "|\033[1;31m 5. Exit!!|\n"
+        "|\033[1;31m  5. Exit!!|\n"
         "\033[1;31m========================================\033[0m\n");
     retry1:
-        printf("Select an option (1-4): ");
+        printf("Select an option (1-5): ");
         scanf("%d",&who);
 
     //if the user input 5 or 0.
     if(who == 5){
-        
+        return 5;
     }
     else if(who!=1 && who!=2 && who!=3 && who!=4){
         printf("Invalid Input!! Error!!\n");
@@ -297,7 +296,7 @@ int bill() {
     printf("\033[1;33m Subtotal:\033[0m            \033[38;2;0;255;0m Rs.%d\n\033[0m", total);
     printf("\033[1;33m GST (18%%):\033[0m           \033[38;2;0;255;0m Rs.%.2f\n\033[0m", gst);//.2f (.2) means rounding off to 2 decimals
     printf("\033[1;31m---------------------------------------------\033[0m\n");
-    printf("\033[1;33m Grand Totmal: \033[0                \033[38;2;0;255;0m Rs.%.2f\n\033[0m", final_total);
+    printf("\033[1;33m Grand Total: \033[0                \033[38;2;0;255;0m Rs.%.2f\n\033[0m", final_total);
     printf("\033[1;31m---------------------------------------------\033[0m\n\n");
 
     revenue += final_total;
@@ -529,48 +528,53 @@ void ingredients()
            "\033[1;31m------------------------------\033[0m\n"
            "\033[38;2;255;255;0m1. Check the quantity of INGREDIENTS!\033[0m\n"
            "\033[38;2;0;255;0m2. Add NEW Ingredients!\033[0m\n"
-           "\033[38;2;0;255;255m3. Return to ARSENAL!\\033[0m\n"
+           "\033[38;2;0;255;255m3. Return to ARSENAL!\033[0m\n"
            "\033[1;31m----------------------------------\033[0m\n\n");
-           printf("Please Select one of the above options(1-3):- ");
-           scanf("%d", &ingredients1);
-           int j=9;
 
-           if(ingredients1 == 1)
-           {
-               printf("Ingredients: \n\n");
-               for(int i=0;i<15;i++)
-               {
-                   if(ing[i][1] == '\0' || quantity[i][1] == '\0'){break;}
-                   printf("%s - %s\n", ing[i], quantity[i]);
-               }
-           }
-           else if(ingredients1 == 2)
-           {
-               add_ingredients:
-               printf("Enter the name of ingredient to add: ");
-               scanf("%s", &ing[j+1]);
-               printf("Enter the quantity of ingredient: ");
-               scanf("%s", &quantity[j+1]);
-               j++;
-               printf("Would you like to add another ingredient?\n");
-               printf("\033[38;2;255;255;0m1. Yes \033[0m\n");
-               printf("\033[38;2;0;255;0m2. No. Return to Ingredients \033[0m\n");
-               printf("Please Select one of the options:- ");
-               scanf(" %d", &ingredients2);
-               if(ingredients2 == 1)
-                {goto add_ingredients;}
-               else if(ingredients2 == 2)
-               {
-                   ingredients();
-               }
-           }
-           else if(ingredients1 == 3)
-           {
-               chef();
-           }
+    printf("Please Select one of the above options(1-3):- ");
+
+    scanf("%d", &ingredients1);      // FIXED: %s → %d
+
+    int j = 9;
+
+    if (ingredients1 == 1)
+    {
+        printf("Ingredients: \n\n");
+        for (int i = 0; i < 15; i++)
+        {
+            if (ing[i][1] == '\0' || quantity[i][1] == '\0'){ break; }
+            printf("%s - %s\n", ing[i], quantity[i]);
+        }
+    }
+    else if (ingredients1 == 2)
+    {
+    add_ingredients:
+        printf("Enter the name of ingredient to add: ");
+        scanf("%s", ing[j+1]);
+
+        printf("Enter the quantity of ingredient: ");
+        scanf("%s", quantity[j+1]);
+
+        j++;
+
+        printf("Would you like to add another ingredient?\n");
+        printf("\033[38;2;255;255;0m1. Yes \033[0m\n");
+        printf("\033[38;2;0;255;0m2. No. Return to Ingredients \033[0m\n");
+        printf("Please Select one of the options:- ");
+
+        scanf("%d", &ingredients2);  
+
+        if (ingredients2 == 1)
+        {
+            goto add_ingredients;
+        }
+        else if (ingredients2 == 2)
+        {
+            ingredients();
+        }
+    }
+    else if (ingredients1 == 3)
+    {
+        chef();
+    }
 }
-//to do
-//chef counter
-//return to menu in menu changer
-//inventory
-//fix table managing sys
