@@ -38,26 +38,27 @@ int costumers=0;
 
 int main() {
 
-    while (1) {     
-        int who = login();
+    int who = login();
 
-        switch (who) {
-        case 1:
-            owner();       
-            break;
-        case 2:
-            chef();           
-        case 3:
-            waiter();         
-        case 4:
-            table_manager();  
-        case 5:
-            printf("Exiting program...\n");
-            return 0;         
-        }
-    }
+    switch (who) {
+    case 1:
+        owner();
+        break;
+    case 2:
+        chef();
+        break;
+    case 3:
+        waiter();
+        break;
+    case 4:
+        table_manager();
+        break;
+    case 5:
+        return 0;
+    default:
+        printf("Invalid choice message\n");}
+    return 0;
 }
-
 int login(){
     //this part is about the login or the start page. here who is who is going to happen
     char usr[100],pass[100];
@@ -193,7 +194,7 @@ int table_manager()
 
            if (tm1 == 2)
            {
-               return 0;
+               main();
            }
            else if (tm1 == 1)
            {
@@ -478,7 +479,7 @@ int chef()
            }
            if(chef1 == 3)
            {
-               return 0;
+               main();
            }
            else
            {
