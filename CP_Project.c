@@ -33,8 +33,8 @@ int tableAvailable[10] = {1,1,1,1,1,1,1,1,1,1};
 char ing[15][20] = {"Tomato", "Onion", "Lettuce", "Buns/Bread", "Cheese", "Milk", "Olive Oil", "Salt", "Ketchup"};
 char quantity[15][20] = {"20 units", "10 units", "25 units", "5 packets", "1 kg", "3 Litres", "500 mL", "500 grams", "75 sachets"};
 char note1[500];
-float revenue=0;
-int costumers=0;
+float revenue;
+int costumers;
 
 int main() {
 
@@ -137,7 +137,7 @@ int owner(){
         revenue_count();
     }
     else if(choice==3){
-        return 0;
+        main();
     }
     else{
         printf("\033[1;31mInvalid input.\033[0m\n");
@@ -168,7 +168,7 @@ int waiter(){
         goto order;
     }
     else if(choice==3){
-        return 0;
+        main();
     }
     else{
         printf("\033[1;31mInvalid input.\033[0m\n");
