@@ -38,27 +38,26 @@ int costumers=0;
 
 int main() {
 
-    int who = login();
+    while (1) {     
+        int who = login();
 
-    switch (who) {
-    case 1:
-        owner();
-        break;
-    case 2:
-        chef();
-        break;
-    case 3:
-        waiter();
-        break;
-    case 4:
-        table_manager();
-        break;
-    case 5:
-        return 0;
-    default:
-        printf("Invalid choice message\n");}
-    return 0;
+        switch (who) {
+        case 1:
+            owner();       
+            break;
+        case 2:
+            chef();           
+        case 3:
+            waiter();         
+        case 4:
+            table_manager();  
+        case 5:
+            printf("Exiting program...\n");
+            return 0;         
+        }
+    }
 }
+
 int login(){
     //this part is about the login or the start page. here who is who is going to happen
     char usr[100],pass[100];
@@ -72,7 +71,7 @@ int login(){
         "|\033[38;2;0;255;0m  2. Login as CHEF          \033[0m   |\n"
         "|\033[38;2;0;255;255m  3. Login as WAITER        \033[0m   |\n"
         "|\033[1;34m  4. Login as TABLE MANAGER \033[0m   |\n"
-        "|\033[1;31m  5. Exit!!|\n"
+        "|\033[1;31m  5. Exit!!                   \033[0m |\n"
         "\033[1;31m========================================\033[0m\n");
     retry1:
         printf("Select an option (1-5): ");
@@ -137,7 +136,7 @@ int owner(){
         revenue_count();
     }
     else if(choice==3){
-        main();
+        return 0;
     }
     else{
         printf("\033[1;31mInvalid input.\033[0m\n");
@@ -168,7 +167,7 @@ int waiter(){
         goto order;
     }
     else if(choice==3){
-        main();
+        return 0;
     }
     else{
         printf("\033[1;31mInvalid input.\033[0m\n");
@@ -194,7 +193,7 @@ int table_manager()
 
            if (tm1 == 2)
            {
-               main();
+               return 0;
            }
            else if (tm1 == 1)
            {
@@ -479,7 +478,7 @@ int chef()
            }
            if(chef1 == 3)
            {
-               main();
+               return 0;
            }
            else
            {
