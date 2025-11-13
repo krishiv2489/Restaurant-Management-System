@@ -53,8 +53,11 @@ int main() {
     case 4:
         table_manager();
         break;
+    case 5:
+        goto exit;
     default:
         printf("Invalid choice message\n");}
+    exit:
     return 0;
 }
 int login(){
@@ -70,13 +73,17 @@ int login(){
         "|\033[38;2;0;255;0m  2. Login as CHEF          \033[0m   |\n"
         "|\033[38;2;0;255;255m  3. Login as WAITER        \033[0m   |\n"
         "|\033[1;34m  4. Login as TABLE MANAGER \033[0m   |\n"
+        "|\033[1;31m 5. Exit!!|\n"
         "\033[1;31m========================================\033[0m\n");
     retry1:
         printf("Select an option (1-4): ");
         scanf("%d",&who);
 
     //if the user input 5 or 0.
-    if(who!=1 && who!=2 && who!=3 && who!=4){
+    if(who == 5){
+        
+    }
+    else if(who!=1 && who!=2 && who!=3 && who!=4){
         printf("Invalid Input!! Error!!\n");
         goto retry1;
     }
